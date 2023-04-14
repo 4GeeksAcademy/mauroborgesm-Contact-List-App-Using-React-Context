@@ -6,11 +6,12 @@ import { Modal } from "./Modal";
 
 
 export const ContactCard = props => {
+	const { store, actions } = useContext(Context);
 	const [state, setState] = useState({
 		//initialize state here
 	});
 
-	const { store, actions } = useContext(Context);
+		
 	return (
 		<li className="list-group-item">
 			<div className="row w-100">
@@ -49,7 +50,14 @@ export const ContactCard = props => {
 					<span className="text-muted small text-truncate">{props.email}</span>
 				</div>
 			</div>
-			<Modal/>
+			<Modal
+          name={props.name}
+          address={props.address}
+          email={props.email}
+          telephone={props.telephone}
+          img={props.img}
+          index={props.index}
+        />
 		</li>
 	);
 };

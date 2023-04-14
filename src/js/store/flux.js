@@ -6,7 +6,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				{name: "Mauro", address: "Costa Rica", email:"mauroborgesm@gmail.com", telephone: "+50688416548"},
 				{name: "Mauro", address: "Costa Rica", email:"mauroborgesm@gmail.com", telephone: "+50688416548"},
 				{name: "Mauro", address: "Costa Rica", email:"mauroborgesm@gmail.com", telephone: "+50688416548"}
-			]
+			],
+			
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -20,20 +21,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 				newContacts.splice(index,1)
 				setStore({contacts:newContacts})
 			},
-			editContact: (index) => {
-				//get the store
-				const store = getStore();
-
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
-
-				//reset the global store
-				setStore({ demo: demo });
-			}
+			editContact: (index, obj) => {
+				 console.log(index) 
+				 console.log (obj) 
+				 let store = getStore() 
+				 let arrTemp =[...store.contacts];
+				arrTemp [index] = obj;
+				setStore({ ...store, contacts: arrTemp });
+			},
+			
 		}
 	};
 };

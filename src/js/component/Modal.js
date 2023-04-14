@@ -1,12 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,  useContext } from "react";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
+import { Context } from "../store/appContext";
+import { ContactCard } from "./ContactCard";
+
 
 export const Modal = props => {
-	const [state, setState] = useState({
-		//initialize state here
-	});
+	const {store,actions}=useContext(Context)
+	const [name, setName] = useState(props.name);
+	const [email, setEmail] = useState(props.email);
+	const [telephone, setTelephone] = useState(props.telephone);
+	const [address, setAddress] = useState(props.address);
 	return (
+		<>	
 		<div className="modal" id="editContact" tabIndex="-1" role="dialog" style={{ display: props.show ? "inline-block" : "none" }}>
 			<div className="modal-dialog" role="document">
 				<div className="modal-content">
@@ -26,19 +32,37 @@ export const Modal = props => {
 						)}
 					</div>
 					<div className="modal-body">
-						<p>Warning: unknown consequences after this point... Kidding!</p>
+						<form>
+							<div className="form-group">
+								<label for="formGroupExampleInput">Name</label>
+								<input type="text" className="form-control" id="{props.name}" value={name} onChange={(e)=>setName(e.target.value)} placeholder="Name"/>
+							</div>
+							<div className="form-group">
+								<label for="formGroupExampleInput2">email</label>
+								<input type="text" className="form-control" id="{props.email}" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="email"/>
+							</div>
+							<div className="form-group">
+								<label for="formGroupExampleInput2">phone</label>
+								<input type="text" className="form-control" id="{props.telephone}" value={telephone} onChange={(e)=>setTelephone(e.target.value)} placeholder="phone"/>
+							</div>
+							<div className="form-group">
+								<label for="formGroupExampleInput2">address</label>
+								<input type="text" className="form-control" id="{props.address}" value={address} onChange={(e)=>setAddress(e.target.value)} placeholder="address"/>
+							</div>
+						</form>
 					</div>
 					<div className="modal-footer">
-						<button type="button" className="btn btn-primary">
-							Oh no!
+						<button type="button " onClick={()=>close} className="btn btn-primary" data-bs-dismiss="modal">
+							Cancelar
 						</button>
-						<button type="button" className="btn btn-secondary" data-dismiss="modal">
-							Do it!
+						<button type="button" onClick={() => actions.editContact(props.index,{name: name, address: address, email: email, telephone: telephone})} className="btn btn-secondary" data-dismiss="modal">
+							Aceptar
 						</button>
 					</div>
 				</div>
 			</div>
 		</div>
+		</>
 	);
 };
 /**
@@ -48,7 +72,11 @@ export const Modal = props => {
 Modal.propTypes = {
 	history: PropTypes.object,
 	onClose: PropTypes.func,
-	show: PropTypes.bool
+	show: PropTypes.bool,
+	address: PropTypes.string,
+	name:PropTypes.string,
+	telephone: PropTypes.string,
+	email:PropTypes.string
 };
 
 /**
