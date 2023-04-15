@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Modal } from "./Modal";
 
 export const Navbar = () => {
 	return (
@@ -8,10 +9,10 @@ export const Navbar = () => {
 				<span className="navbar-brand mb-0 h1">React Boilerplate</span>
 			</Link>
 			<div className="ml-auto">
-				<Link to="/demo">
-					<button className="btn btn-success">Add new contact</button>
-				</Link>
+					<button type="button" data-bs-toggle="modal" data-bs-target={"#editmodal-1"} className="btn btn-primary">Add new contact</button>
 			</div>
+			<Modal index={-1}></Modal>
 		</nav>
+		
 	);
 };
