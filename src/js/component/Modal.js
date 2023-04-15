@@ -13,7 +13,7 @@ export const Modal = props => {
 	const [address, setAddress] = useState(props.address);
 	return (
 		<>	
-		<div className="modal" id={"#editmodal"+props.index} tabIndex="-1" role="dialog" style={{ display: props.show ? "inline-block" : "none" }}>
+		<div className="modal" id={"editmodal"+props.index} tabIndex="-1" role="dialog" style={{ display: props.show ? "inline-block" : "none" }}>
 			<div className="modal-dialog" role="document">
 				<div className="modal-content">
 					<div className="modal-header">
@@ -28,7 +28,7 @@ export const Modal = props => {
 								<span aria-hidden="true">&times;</span>
 							</button>
 						) : (
-							""
+							<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						)}
 					</div>
 					<div className="modal-body">
@@ -55,7 +55,7 @@ export const Modal = props => {
 						<button type="button " onClick={()=>close} className="btn btn-primary" data-bs-dismiss="modal">
 							Cancelar
 						</button>
-						<button type="button" onClick={() => actions.editContact(props.index,{name: name, address: address, email: email, telephone: telephone})} className="btn btn-secondary" data-dismiss="modal">
+						<button type="button" onClick={() => actions.editContact(props.index,{name: name, address: address, email: email, telephone: telephone})} className="btn btn-secondary"  data-bs-dismiss="modal">
 							Aceptar
 						</button>
 					</div>
