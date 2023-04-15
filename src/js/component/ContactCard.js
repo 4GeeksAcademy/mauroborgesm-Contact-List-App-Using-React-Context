@@ -20,7 +20,7 @@ export const ContactCard = props => {
 				</div>
 				<div className="col-12 col-sm-6 col-md-9 text-center text-sm-left">
 					<div className=" float-right">
-						<button className="btn" data-bs-toggle="modal" data-bs-target="#editContact">
+						<button className="btn" data-bs-toggle="modal" data-bs-target={"#editContact"+props.index}>
 
 							<i className="fas fa-pencil-alt mr-3" />
 						</button>

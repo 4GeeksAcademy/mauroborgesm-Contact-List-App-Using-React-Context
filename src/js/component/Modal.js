@@ -13,7 +13,7 @@ export const Modal = props => {
 	const [address, setAddress] = useState(props.address);
 	return (
 		<>	
-		<div className="modal" id="editContact" tabIndex="-1" role="dialog" style={{ display: props.show ? "inline-block" : "none" }}>
+		<div className="modal" id={"#editmodal"+props.index} tabIndex="-1" role="dialog" style={{ display: props.show ? "inline-block" : "none" }}>
 			<div className="modal-dialog" role="document">
 				<div className="modal-content">
 					<div className="modal-header">
@@ -34,19 +34,19 @@ export const Modal = props => {
 					<div className="modal-body">
 						<form>
 							<div className="form-group">
-								<label for="formGroupExampleInput">Name</label>
+								<label htmlFor="formGroupExampleInput">Name</label>
 								<input type="text" className="form-control" id="{props.name}" value={name} onChange={(e)=>setName(e.target.value)} placeholder="Name"/>
 							</div>
 							<div className="form-group">
-								<label for="formGroupExampleInput2">email</label>
+								<label htmlFor="formGroupExampleInput2">email</label>
 								<input type="text" className="form-control" id="{props.email}" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="email"/>
 							</div>
 							<div className="form-group">
-								<label for="formGroupExampleInput2">phone</label>
+								<label htmlFor="formGroupExampleInput2">phone</label>
 								<input type="text" className="form-control" id="{props.telephone}" value={telephone} onChange={(e)=>setTelephone(e.target.value)} placeholder="phone"/>
 							</div>
 							<div className="form-group">
-								<label for="formGroupExampleInput2">address</label>
+								<label htmlFor="formGroupExampleInput2">address</label>
 								<input type="text" className="form-control" id="{props.address}" value={address} onChange={(e)=>setAddress(e.target.value)} placeholder="address"/>
 							</div>
 						</form>
