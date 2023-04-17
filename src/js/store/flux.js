@@ -21,7 +21,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				newContacts.splice(index,1)
 				setStore({contacts:newContacts})
 			},
-			editContact: (index, obj) => {
+			editContact: (obj, index) => {
 				 console.log(index) 
 				 console.log (obj) 
 				 let store = getStore() 

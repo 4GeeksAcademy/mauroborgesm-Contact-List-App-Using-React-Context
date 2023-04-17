@@ -24,7 +24,9 @@ export const Modal = props => {
 			actions.addContact(newContact)
 		} else if (props.index >= 0) {
 			// Editar contacto
+			
 			actions.editContact(newContact,props.index)
+			
 		} 
 	}
 	return (
