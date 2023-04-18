@@ -1,11 +1,13 @@
 import rigoImage from "../../img/rigo-baby.jpg"
+const apiURL=process.env.API_URL
+const agendaSLug=process.env.AGENDA_SLUG
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			contacts:[
-				{name: "Mauro", address: "Costa Rica", email:"mauroborgesm@gmail.com", telephone: "+50688416548"},
-				{name: "Mauro", address: "Costa Rica", email:"mauroborgesm@gmail.com", telephone: "+50688416548"},
-				{name: "Mauro", address: "Costa Rica", email:"mauroborgesm@gmail.com", telephone: "+50688416548"}
+				{full_name: "Mauro", address: "Costa Rica", email:"mauroborgesm@gmail.com", phone: "+50688416548"},
+				{full_name: "Mauro", address: "Costa Rica", email:"mauroborgesm@gmail.com", phone: "+50688416548"},
+				{full_name: "Mauro", address: "Costa Rica", email:"mauroborgesm@gmail.com", phone: "+50688416548"}
 			],
 			
 		},
@@ -29,6 +31,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 				arrTemp [index] = obj;
 				setStore({ ...store, contacts: arrTemp });
 			},
+			getAgenda: () => {
+				fetch (apiURL + "/agenda/" + agendaSLug)
+				.then(response =>{
+					console.log(response.ok)
+					if(response.ok){
+						return response.json()
+					}else{
+						console.log(response.status+":"+response.statusText)
+					}
+				})
+				.then(data=>{
+					console.log(data)
+					setStore({contacts:data})
+				})
+				.catch(error=>{
+
+				})
+				console.log("Iniciada la peticion")
+			}
 			
 		}
 	};

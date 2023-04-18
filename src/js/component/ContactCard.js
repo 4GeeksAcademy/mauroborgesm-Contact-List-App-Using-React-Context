@@ -16,7 +16,7 @@ export const ContactCard = props => {
 		<li className="list-group-item">
 			<div className="row w-100">
 				<div className="col-12 col-sm-6 col-md-3 px-0">
-					<img src={props.img} alt="{props.name}" className="rounded-circle mx-auto d-block img-fluid" />
+					<img src={props.img} alt="{props.full_name}" className="rounded-circle mx-auto d-block img-fluid" />
 				</div>
 				<div className="col-12 col-sm-6 col-md-9 text-center text-sm-left">
 					<div className=" float-right">
@@ -28,7 +28,7 @@ export const ContactCard = props => {
 							<i className="fas fa-trash-alt" />
 						</button>
 					</div>
-					<label className="name lead">{props.name}</label>
+					<label className="name lead">{props.full_name}</label>
 					<br />
 					<i className="fas fa-map-marker-alt text-muted mr-3" />
 					<span className="text-muted">{props.address}</span>
@@ -37,9 +37,9 @@ export const ContactCard = props => {
 						className="fa fa-phone fa-fw text-muted mr-3"
 						data-toggle="tooltip"
 						title=""
-						data-original-title="{props.telephone}"
+						data-original-title="{props.phone}"
 					/>
-					<span className="text-muted small">{props.telephone}</span>
+					<span className="text-muted small">{props.phone}</span>
 					<br />
 					<span
 						className="fa fa-envelope fa-fw text-muted mr-3"
@@ -51,10 +51,10 @@ export const ContactCard = props => {
 				</div>
 			</div>
 			<Modal
-          name={props.name}
+          full_name={props.full_name}
           address={props.address}
           email={props.email}
-          telephone={props.telephone}
+          phone={props.phone}
           img={props.img}
           index={props.index}
         />
@@ -69,9 +69,9 @@ export const ContactCard = props => {
 ContactCard.propTypes = {
 	history: PropTypes.object,
 	onDelete: PropTypes.func,
-	name: PropTypes.string,
+	full_name: PropTypes.string,
 	email: PropTypes.string,
-	telephone: PropTypes.string,
+	phone: PropTypes.string,
 	img: PropTypes.string,
 	address: PropTypes.string,
 

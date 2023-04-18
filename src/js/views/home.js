@@ -8,8 +8,10 @@ import { Modal } from "../component/Modal";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
-
   const { contacts, numero } = store;
+  useEffect(()=>{
+    actions.getAgenda();
+  },[])
 
   return (
     <div className="d-flex flex-column justify-center">
@@ -17,10 +19,10 @@ export const Home = () => {
       {contacts.map((contacts, index) => (
         <div key={index}>
         <ContactCard
-          name={contacts.name}
+          full_name={contacts.full_name}
           address={contacts.address}
           email={contacts.email}
-          telephone={contacts.telephone}
+          phone={contacts.phone}
           img={rigoImage}
           index={index}
 
