@@ -13,7 +13,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
-			addContact: (contact) => {
+			addContact: async (contact) => {
+				let response = await fetch(apiURL + "/", {
+					body:JSON.stringify(contact),
+					method:"POST",
+					headers:{
+						"Content-type":"aplication/json"
+					}
+					
+				});
+				if (!response.ok){
+					console.log(response.status + ": "+ response.statusText)
+					return
+					}
 				let store=getStore()
 				let newContacts=[...store.contacts, contact]
 				setStore({contacts:newContacts})
