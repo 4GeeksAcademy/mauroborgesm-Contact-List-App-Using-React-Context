@@ -33,7 +33,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({contacts:newContacts})
 			},
 			onDelete: (id) => {
-				fetch(apiURL+"/"+id,{
+				fetch(apiURL+id,{
 					method: "DELETE"
 				}).then(resp=>{
 					if (resp.ok){

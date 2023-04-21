@@ -14,9 +14,16 @@ export const Modal = props => {
 	
 
 	useEffect(()=>{
-		if (props.index == -1) {
-				// Crear nuevo contacto
-				
+		let newContact={
+			full_name: full_name, 
+			email: email, 
+			phone: telephone, 
+			address: address,
+			index: props.index
+			}
+			if (props.index == -1) {
+			// Crear nuevo contacto
+			actions.addContact(newContact, props.index)
 			} else if (props.index >= 0) {
 				// Editar contacto
 				let updateContact = store.contacts.find(contact => contact.id == props.index)
@@ -49,6 +56,7 @@ export const Modal = props => {
 			actions.editContact(newContact, props.index)
 
 		}
+		
 	}
 
 		return (
