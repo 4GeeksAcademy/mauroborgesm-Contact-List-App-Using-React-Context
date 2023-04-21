@@ -8,8 +8,10 @@ import { Modal } from "./Modal";
 export const ContactCard = props => {
 	const { store, actions } = useContext(Context);
 	const [state, setState] = useState({
-		//initialize state here
+	
 	});
+	
+
 
 		
 	return (

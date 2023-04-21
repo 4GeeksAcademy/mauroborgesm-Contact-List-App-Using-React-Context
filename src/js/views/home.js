@@ -10,6 +10,7 @@ export const Home = () => {
   const { store, actions } = useContext(Context);
   const { contacts, numero } = store;
   useEffect(()=>{
+    //llama a la funcion getAgenda
     actions.getAgenda();
   },[])
 
@@ -24,14 +25,15 @@ export const Home = () => {
           email={contacts.email}
           phone={contacts.phone}
           img={rigoImage}
-          index={index}
+          index={contacts.id}
+          onDelete={()=>actions.delContact(index)}
 
         
         />
         
-        <Modal/>
+        <Modal index={contacts.id}></Modal>
         </div>
-
+      ||"Cargando contactos..."
         
       ))}
     </div>

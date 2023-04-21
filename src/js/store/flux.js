@@ -1,6 +1,6 @@
 import rigoImage from "../../img/rigo-baby.jpg"
 const apiURL=process.env.API_URL
-const agendaSLug=process.env.AGENDA_SLUG
+const agendaSlug=process.env.AGENDA_SLUG
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -14,11 +14,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 		actions: {
 			// Use getActions to call a function within a fuction
 			addContact: async (contact) => {
-				let response = await fetch(apiURL + "/", {
-					body:JSON.stringify(contact),
+				console.log(JSON.stringify({...contact, agenda_slug : agendaSlug}))
+				let response = await fetch(apiURL, {
+					body:JSON.stringify({...contact, agenda_slug : agendaSlug}),
 					method:"POST",
 					headers:{
-						"Content-type":"aplication/json"
+						"Content-Type":"application/json"
 					}
 					
 				});
@@ -26,25 +27,57 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(response.status + ": "+ response.statusText)
 					return
 					}
+					let data = await response.json()
 				let store=getStore()
-				let newContacts=[...store.contacts, contact]
+				let newContacts=[...store.contacts,{...contact, id:data.id}]
 				setStore({contacts:newContacts})
 			},
-			onDelete: (index) => {
-				let newContacts=[...getStore().contacts]
+			onDelete: (id) => {
+				fetch(apiURL+"/"+id,{
+					method: "DELETE"
+				}).then(resp=>{
+					if (resp.ok){
+						let newContacts=[...getStore().contacts]
+				let index=newContacts.findIndex(contact=>contact.id==id)
 				newContacts.splice(index,1)
 				setStore({contacts:newContacts})
+					}else{
+						console.error(resp.status +": " + resp.statusText)
+					}
+				}).catch(error)
+				
 			},
-			editContact: (obj, index) => {
-				 console.log(index) 
-				 console.log (obj) 
-				 let store = getStore() 
-				 let arrTemp =[...store.contacts];
-				arrTemp [index] = obj;
-				setStore({ ...store, contacts: arrTemp });
+			editContact: async (obj, index) => {
+				let store = getStore();
+				let contactsCopy = [...store.contacts];
+				contactsCopy[index] = obj;
+			
+				// Update the contact in the API
+				let response = await fetch(`${apiURL}/${index}`, {
+					method: "PUT",
+					body: JSON.stringify(obj),
+					headers: {
+						"Content-Type": "application/json"
+					}
+				});
+			
+				if (!response.ok) {
+					console.log(response.status + ": " + response.statusText);
+					return;
+				}
+			
+				setStore({ ...store, contacts: contactsCopy });
 			},
+			// editContact: (obj, index) => {
+			// 	 console.log(index) 
+			// 	 console.log (obj) 
+			// 	 let store = getStore() 
+			// 	 let arrTemp =[...store.contacts];
+			// 	arrTemp [index] = obj;
+			// 	setStore({ ...store, contacts: arrTemp });
+			// },
 			getAgenda: () => {
-				fetch (apiURL + "/agenda/" + agendaSLug)
+				fetch (apiURL + "/agenda/" + agendaSlug)
 				.then(response =>{
 					console.log(response.ok)
 					if(response.ok){
