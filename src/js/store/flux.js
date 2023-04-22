@@ -47,26 +47,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}).catch(error)
 				
 			},
-			editContact: async (obj, index) => {
-				let store = getStore();
-				let contactsCopy = [...store.contacts];
-				contactsCopy[index] = obj;
-			
-				// Update the contact in the API
-				let response = await fetch(`${apiURL}/${index}`, {
-					method: "PUT",
-					body: JSON.stringify(obj),
-					headers: {
-						"Content-Type": "application/json"
+			updateContact: async(data, id)=>{
+				console.log(id);
+					let response = await fetch(apiURL+ id, {
+						body: JSON.stringify({...data, agenda_slug: agendaSlug}),
+						method: "PUT",
+						headers: {
+							"Content-Type": "application/json"
+						}
+					})
+					if (response.ok){
+						let newContacts = [...getStore().contacts]
+						let index = newContacts.findIndex(contact=>contact.id == id)
+						console.log(index)
+						newContacts[index] = {...data,id}
+						setStore({...getStore(), contacts:newContacts})
+					} else {
+						console.error(response.status + "/ " + response.statusText);
 					}
-				});
-			
-				if (!response.ok) {
-					console.log(response.status + ": " + response.statusText);
-					return;
-				}
-			
-				setStore({ ...store, contacts: contactsCopy });
 			},
 			// editContact: (obj, index) => {
 			// 	 console.log(index) 

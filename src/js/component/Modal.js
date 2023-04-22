@@ -26,12 +26,13 @@ export const Modal = props => {
 			actions.addContact(newContact, props.index)
 			} else if (props.index >= 0) {
 				// Editar contacto
+				actions.updateContact(newContact, props.index)
 				let updateContact = store.contacts.find(contact => contact.id == props.index)
 				console.log(updateContact)
-				setName(updateContact.full_name);
-				setEmail(updateContact.email);
-				setAddress(updateContact.address);
-				setTelephone(updateContact.phone);
+				// setName(updateContact.full_name);
+				// setEmail(updateContact.email);
+				// setAddress(updateContact.address);
+				// setTelephone(updateContact.phone);
 				
 				
 
@@ -53,7 +54,7 @@ export const Modal = props => {
 		} else if (props.index >= 0) {
 			// Editar contacto
 
-			actions.editContact(newContact, props.index)
+			actions.updateContact(newContact, props.index)
 
 		}
 		
